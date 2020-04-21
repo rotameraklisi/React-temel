@@ -35,9 +35,17 @@ class App extends Component {
                     {name: 'Max', age: 28},
                     {name: event.target.value, age: 29},
                     {name: 'Stephanie', age: 26}
-                ]
+                ],otherState:'some other value',
+                showPersons: false
             }
         )
+    }
+
+    togglePersonsHandler = ()=>
+    {
+const doesShow = this.state.showPersons
+        this.setState({showPersons : !doesShow})
+
     }
 
 
@@ -49,22 +57,28 @@ class App extends Component {
                     <p> This is really working</p>
                     <p> This is really working</p>
                     {/*bind ile fonksiyona parametre verme<button onClick={this.switchNameHandler.bind(this,'Maximailizian')}>Switch Name</button>*/}
-                    <button onClick={()=> this.switchNameHandler('MAximilization')}>Switch Name</button>
-                    <Person
-                        name={this.state.persons[0].name}
-                        age={this.state.persons[0].age}/>
-                    <Person
-                        name={this.state.persons[1].name}
-                        age={this.state.persons[1].age}
-                        click={this.switchNameHandler.bind(this,'Max!')}
-                        changed = {this.namedChangedHandler}
-                    >
+                    {/*<button onClick={()=> this.switchNameHandler('MAximilization')}>Switch Name</button>*/}
+                    <button onClick={this.togglePersonsHandler}>Switch Name</button>
+                    {this.state.showPersons ===true ?
+                        <div>
+                            <Person
+                                name={this.state.persons[0].name}
+                                age={this.state.persons[0].age}/>
+                            <Person
+                                name={this.state.persons[1].name}
+                                age={this.state.persons[1].age}
+                                click={this.switchNameHandler.bind(this, 'Max!')}
+                                changed={this.namedChangedHandler}
+                            >
 
-                        My hobbies: Racing
-                    </Person>
-                    <Person
-                        name={this.state.persons[2].name}
-                        age={this.state.persons[2].age}/>
+                                My hobbies: Racing
+                            </Person>
+                            <Person
+                                name={this.state.persons[2].name}
+                                age={this.state.persons[2].age}/>
+
+                        </div> : null
+                    }
                 </div>
             )
 
